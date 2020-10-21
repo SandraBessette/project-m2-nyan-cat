@@ -59,7 +59,7 @@ class Engine {
     if (this.isPlayerDead()) {
       window.alert('Game over');
       return;
-    }
+    }    
 
     // If the player is not dead, then we put a setTimeout to run the gameLoop in 20 milliseconds
     setTimeout(this.gameLoop, 20);
@@ -68,6 +68,9 @@ class Engine {
   // This method is not implemented correctly, which is why
   // the burger never dies. In your exercises you will fix this method.
   isPlayerDead = () => {
-    return false;
+    return this.enemies.some((enemy) => {
+      return ((enemy.x === this.player.x) && (enemy.y + PLAYER_HEIGHT > this.player.y));
+    });
+    
   };
 }
