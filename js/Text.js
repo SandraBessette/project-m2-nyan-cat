@@ -15,6 +15,7 @@ class Text {
     div.style.zIndex = 2000;
 
     root.appendChild(div);
+    console.log(div);
 
     this.domElement = div;
   }

@@ -20,8 +20,20 @@ const keydownHandler = (event) => {
   }
 };
 
+const clickHandler = (event) => {
+  gameEngine.gameLoop();
+  event.target.classList.add("btn-disapear");
+
+}
 // We add an event listener to document. document the ancestor of all DOM nodes in the DOM.
 document.addEventListener('keydown', keydownHandler);
 
 // We call the gameLoop method to start the game
-gameEngine.gameLoop();
+
+const startBtn = new Text(document.getElementById('app'), 2 * PLAYER_WIDTH , 50/100 * GAME_HEIGHT);
+console.log(startBtn);
+startBtn.domElement.classList.add("start-btn");
+startBtn.update("start");
+
+startBtn.domElement.addEventListener("click",clickHandler);
+

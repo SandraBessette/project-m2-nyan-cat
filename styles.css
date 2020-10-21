@@ -1,0 +1,13 @@
+.start-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 125px;
+    height: 65px;
+    border-radius: 10px;
+    background-color: purple;  
+}
+
+.btn-disapear{
+   display:none;
+}
