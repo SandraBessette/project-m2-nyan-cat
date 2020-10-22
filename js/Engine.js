@@ -14,6 +14,8 @@ class Engine {
     // Initially, we have no enemies in the game. The enemies property refers to an array
     // that contains instances of the Enemy class
     this.enemies = [];
+
+    this.startButton = startButton();    
     // We add the background image to the game
     addBackground(this.root);
   }
@@ -58,6 +60,9 @@ class Engine {
     // and return from the method (Why is the return statement important?)
     if (this.isPlayerDead()) {
       window.alert('Game over');
+      this.startButton.classList.remove("btn-clicked");
+      this.startButton.disabled = false;
+
       return;
     }    
 

@@ -39,6 +39,21 @@ const nextEnemySpot = (enemies) => {
 // The function takes one parameter
 // The parameter represents the DOM node to which we will add the background
 const addBackground = (root) => {
+
+  // We don't want the enemies to go beyond the lower edge of the image
+  // so we place a white div to hide the enemies after they reach the bottom.
+  // To see what it does, you can comment out all the remaining lines in the function to see the effect.
+  const whiteBoxTop = document.createElement('div');
+
+  // We put a high z-index so that the div is placed over all other DOM nodes
+  whiteBoxTop.style.zIndex = 100;
+  whiteBoxTop.style.position = 'absolute';
+  whiteBoxTop.style.top = `${-ENEMY_HEIGHT}px`;
+  whiteBoxTop.style.height = `${ENEMY_HEIGHT}px`;
+  whiteBoxTop.style.width = `${GAME_WIDTH}px`;
+  whiteBoxTop.style.background = '#fff';
+  root.append(whiteBoxTop);
+
   // We create a new img DOM node.
   const bg = document.createElement('img');
 
@@ -64,3 +79,7 @@ const addBackground = (root) => {
   whiteBox.style.background = '#fff';
   root.append(whiteBox);
 };
+
+const startButton = () => {
+  return document.querySelector(".start-btn");
+}

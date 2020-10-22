@@ -1,13 +1,65 @@
-.start-btn {
+body {
+    margin: 0px;
+    font-family: 'Staatliches', cursive;
+}
+
+p {
+    font-size: 32px;
+    margin: 0px;
+}
+
+header {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 125px;
-    height: 65px;
-    border-radius: 10px;
-    background-color: purple;  
+    height: 125px;
+    background-color:purple;
+    color: plum;
+   
+    font-size: 32px;
 }
 
-.btn-disapear{
-   display:none;
+.top-section {
+    display: flex;   
+    justify-content: center;
+    align-items: center;
+}
+.instruction {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
+    padding: 25px;
+}
+
+.start-btn {
+    font-family: inherit;
+    color: plum;
+    font-size: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 75px;
+    border-radius: 10px;
+    background-color: purple;  
+    border: dashed 5px gold;
+}
+
+.btn-clicked{
+    background-color:plum;
+    color: #E6E6FA;
+}
+.top-section {
+    margin-bottom: 156px;
+}
+.game-section {    
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+} 
+
+.game-container{
+    position: relative; 
 }
