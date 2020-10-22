@@ -21,9 +21,12 @@ const keydownHandler = (event) => {
 };
 
 const clickHandler = (event) => {
+  gameEngine.reset();
   gameEngine.gameLoop();
-  event.target.classList.add("btn-clicked");
+  
+ /* event.target.classList.add("btn-clicked");
   event.target.disabled = true; 
+  gameEngine.GameOverText.domElement.style.visibility = "hidden";*/
 }
 // We add an event listener to document. document the ancestor of all DOM nodes in the DOM.
 document.addEventListener('keydown', keydownHandler);

@@ -80,6 +80,17 @@ const addBackground = (root) => {
   root.append(whiteBox);
 };
 
+const addGameOver = (root) => {
+  const gameEngine = new Text(root, "20%", "45%" );
+  gameEngine.update("Game Over!");
+  gameEngine.domElement.style.visibility = "hidden";
+  gameEngine.domElement.style.fontSize = "45px"; 
+  gameEngine.domElement.style.color = "plum"; 
+  gameEngine.domElement.style.textShadow = "5px 5px purple"
+  return gameEngine;
+}
+
 const startButton = () => {
   return document.querySelector(".start-btn");
 }
+

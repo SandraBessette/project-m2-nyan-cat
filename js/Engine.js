@@ -16,6 +16,8 @@ class Engine {
     this.enemies = [];
 
     this.startButton = startButton();    
+
+    this.GameOverText = addGameOver(this.root);
     // We add the background image to the game
     addBackground(this.root);
   }
@@ -59,7 +61,8 @@ class Engine {
     // We check if the player is dead. If he is, we alert the user
     // and return from the method (Why is the return statement important?)
     if (this.isPlayerDead()) {
-      window.alert('Game over');
+      //window.alert('Game over');
+      this.GameOverText.domElement.style.visibility = "unset";
       this.startButton.classList.remove("btn-clicked");
       this.startButton.disabled = false;
 
@@ -77,5 +80,12 @@ class Engine {
       return ((enemy.x === this.player.x) && (enemy.y + PLAYER_HEIGHT > this.player.y));
     });
     
+  };
+
+  reset = () => {
+    this.player.reset();
+    this.startButton.classList.add("btn-clicked");
+    this.startButton.disabled = true; 
+    this.GameOverText.domElement.style.visibility = "hidden";
   };
 }

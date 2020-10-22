@@ -41,4 +41,9 @@ class Player {
     }
     this.domElement.style.left = `${this.x}px`;
   }
+
+  reset() {
+    this.x = 2 * PLAYER_WIDTH;
+    this.domElement.style.left = `${this.x}px`;
+  }
 }
