@@ -15,6 +15,8 @@ class Engine {
     // that contains instances of the Enemy class
     this.enemies = [];
 
+    this.isGameStarted = false;
+
     this.startButton = startButton();    
 
     this.GameOverText = addGameOver(this.root);
@@ -62,6 +64,7 @@ class Engine {
     // and return from the method (Why is the return statement important?)
     if (this.isPlayerDead()) {
       //window.alert('Game over');
+      this.isGameStarted = false;
       this.GameOverText.domElement.style.visibility = "unset";
       this.startButton.classList.remove("btn-clicked");
       this.startButton.disabled = false;
@@ -77,7 +80,7 @@ class Engine {
   // the burger never dies. In your exercises you will fix this method.
   isPlayerDead = () => {
     return this.enemies.some((enemy) => {
-      return ((enemy.x === this.player.x) && (enemy.y + PLAYER_HEIGHT > this.player.y));
+      return ((enemy.x === this.player.x) && (enemy.y + ENEMY_HEIGHT > this.player.y && enemy.y < this.player.y + PLAYER_HEIGHT));
     });
     
   };

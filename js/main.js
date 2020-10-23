@@ -9,6 +9,10 @@ const gameEngine = new Engine(document.getElementById('app'));
 const keydownHandler = (event) => {
   // event.code contains a string. The string represents which key was press. If the
   // key is left, then we call the moveLeft method of gameEngine.player (where is this method defined?)
+
+  if (!gameEngine.isGameStarted)
+    return;
+    
   if (event.code === 'ArrowLeft') {
     gameEngine.player.moveLeft();
   }
@@ -18,9 +22,19 @@ const keydownHandler = (event) => {
   if (event.code === 'ArrowRight') {
     gameEngine.player.moveRight();
   }
+
+  if (event.code === 'ArrowUp') {
+    gameEngine.player.moveUp();
+  }
+
+
+  if (event.code === 'ArrowDown') {
+    gameEngine.player.moveDown();
+  }
 };
 
 const clickHandler = (event) => {
+  gameEngine.isGameStarted = true; 
   gameEngine.reset();
   gameEngine.gameLoop();
   

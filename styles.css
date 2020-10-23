@@ -31,6 +31,7 @@ header {
     align-items: center;
     margin-right: 50px;
     padding: 25px;   
+   
 }
 
 .start-btn {
@@ -52,8 +53,12 @@ header {
     color: #E6E6FA;
 }
 .top-section {
-    margin-bottom: 156px;
+    z-index: 100;
+    position: relative;
+    background-color: white;    
+    padding: 30px 30px 45px 30px;    
 }
+
 .game-section {    
     display: flex;
     justify-content: center;

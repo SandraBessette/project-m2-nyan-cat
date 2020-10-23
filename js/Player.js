@@ -42,8 +42,30 @@ class Player {
     this.domElement.style.left = `${this.x}px`;
   }
 
+  moveUp() {
+    if (this.y - PLAYER_HEIGHT > 0) {
+      this.y = this.y - PLAYER_HEIGHT;
+    }
+    else
+      this.y = 0;
+
+    this.domElement.style.top = `${this.y}px`;
+  }
+
+  moveDown() {
+    if (this.y + 2 * PLAYER_HEIGHT < GAME_HEIGHT) {
+      this.y = this.y + PLAYER_HEIGHT;
+    }
+    else
+      this.y = GAME_HEIGHT - PLAYER_HEIGHT -10;
+
+    this.domElement.style.top = `${this.y}px`;
+  }
+
   reset() {
     this.x = 2 * PLAYER_WIDTH;
+    this.y = GAME_HEIGHT - PLAYER_HEIGHT - 10;
     this.domElement.style.left = `${this.x}px`;
+    this.domElement.style.top = `${this.y}px`;
   }
 }
