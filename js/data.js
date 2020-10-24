@@ -17,3 +17,9 @@ const MAX_ENEMIES = 3;
 // These constants represent the player width and height.
 const PLAYER_WIDTH = 75;
 const PLAYER_HEIGHT = 54;
+
+//These constant reprsent the reward height and width
+
+const REWARD_WIDTH = 75;
+const REWARD_HEIGHT = 62.5;  //divided by 8
+const MAX_REWARD = 2;

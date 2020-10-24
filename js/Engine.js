@@ -20,6 +20,12 @@ class Engine {
     this.startButton = startButton();    
 
     this.GameOverText = addGameOver(this.root);
+
+    this.score = new Text(this.root, "10px", "10px" );
+    this.score.update("100");
+
+    this.rewards = [];
+    this.needCeateReward = true;
     // We add the background image to the game
     addBackground(this.root);
   }
@@ -58,6 +64,19 @@ class Engine {
       // We add this enemy to the enemies array
       const spot = nextEnemySpot(this.enemies);
       this.enemies.push(new Enemy(this.root, spot));
+    }    
+
+    if (this.rewards.length === 0) {
+      let rewardSpotsArr = createRewardSpots();
+      console.log("longueur", rewardSpotsArr.length);
+      this.rewards = rewardSpotsArr.map((spot) => {
+        console.log("*********");
+        console.log("spotx", spot[0]);
+        console.log("spoty", spot[1]);
+        return new Reward(this.root, spot[0], spot[1]);
+      });
+      this.needCeateReward = false;
+
     }
 
     // We check if the player is dead. If he is, we alert the user
@@ -70,7 +89,21 @@ class Engine {
       this.startButton.disabled = false;
 
       return;
-    }    
+    }  
+
+    const theReward = this.rewardCatched();
+    if (theReward !== undefined) {
+      // console.log("theReward.price", theReward.price);
+      // console.log("parseInt(this.score.text)", this.score.text);
+
+      const newScore = parseInt(this.score.text) + theReward.price;
+      this.score.update(newScore.toString());
+      const index = this.rewards.indexOf(theReward);
+      if (index > -1) {
+        this.rewards.splice(index, 1);
+      }
+      theReward.remove();
+    }
 
     // If the player is not dead, then we put a setTimeout to run the gameLoop in 20 milliseconds
     setTimeout(this.gameLoop, 20);
@@ -85,10 +118,22 @@ class Engine {
     
   };
 
+  rewardCatched = () => {    
+    return this.rewards.find((reward) => {     
+      return ((reward.x === this.player.x) && (reward.y + REWARD_HEIGHT > this.player.y && reward.y < this.player.y + PLAYER_HEIGHT));
+    });    
+  };
+
   reset = () => {
     this.player.reset();
     this.startButton.classList.add("btn-clicked");
     this.startButton.disabled = true; 
     this.GameOverText.domElement.style.visibility = "hidden";
+    this.rewards.forEach((reward)=>{
+        reward.remove();
+    });
+    this.rewards = [];
+    this.needCeateReward = true;
+    this.score.update("100");
   };
 }

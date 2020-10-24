@@ -36,6 +36,7 @@ const keydownHandler = (event) => {
 const clickHandler = (event) => {
   gameEngine.isGameStarted = true; 
   gameEngine.reset();
+  //window.location.reload();
   gameEngine.gameLoop();
   
  /* event.target.classList.add("btn-clicked");

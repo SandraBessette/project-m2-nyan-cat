@@ -34,6 +34,27 @@ const nextEnemySpot = (enemies) => {
   return candidate;
 };
 
+const createRewardSpots = () => {
+  // enemySpots will refer to the number of spots available (can you calculate it?)
+  const rewardXSpots = GAME_WIDTH / REWARD_WIDTH;
+  const rewardYSpots = GAME_HEIGHT / REWARD_HEIGHT;
+
+  //const XSpotTaken = [false, false, false, false, false];
+  const YSpotTaken = [false, false, false, false, false, false, false, false]; 
+
+  let candidateArr = [];
+  while (candidateArr.length < MAX_REWARD) {
+    let candidateY = Math.floor(Math.random() * rewardYSpots);
+    let candidateX = Math.floor(Math.random() * rewardXSpots);
+    if (YSpotTaken[candidateY] === false && !(candidateX === 2 && candidateY === 7)) {
+      candidateArr.push([candidateX, candidateY]);
+      YSpotTaken[candidateY] = true;
+    }
+  }  
+
+  return candidateArr;
+}
+
 // addBackground contains all the logic to display the starry background of the game.
 // It is a variable that refers to a function.
 // The function takes one parameter

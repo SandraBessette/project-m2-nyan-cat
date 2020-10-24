@@ -5,6 +5,7 @@ class Text {
   constructor(root, xPos, yPos) {
     // We create a DOM element, set its CSS attributes then append it to the parent DOM element. We also
     // set the \`domElement\` property of the instance to the newly created DOM element so we can update it later
+    this.root = root;
     const div = document.createElement('div');
 
     div.style.position = 'absolute';
@@ -14,14 +15,19 @@ class Text {
     div.style.font = 'bold 30px Impact';
     div.style.zIndex = 2000;
 
-    root.appendChild(div);
-    console.log(div);
+    this.root.appendChild(div);    
 
     this.domElement = div;
+    this.text = "";
   }
 
   // This method is used to update the text displayed in the DOM element
   update(txt) {
     this.domElement.innerText = txt;
+    this.text = this.domElement.innerText;
+  }
+
+  remove = ()=>{
+    this.root.removeChild(this.domElement);
   }
 }
