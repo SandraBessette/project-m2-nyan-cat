@@ -34,7 +34,7 @@ const nextEnemySpot = (enemies) => {
   return candidate;
 };
 
-const createRewardSpots = () => {
+const createRewardSpots = (player) => {
   // enemySpots will refer to the number of spots available (can you calculate it?)
   const rewardXSpots = GAME_WIDTH / REWARD_WIDTH;
   const rewardYSpots = GAME_HEIGHT / REWARD_HEIGHT;
@@ -45,8 +45,8 @@ const createRewardSpots = () => {
   let candidateArr = [];
   while (candidateArr.length < MAX_REWARD) {
     let candidateY = Math.floor(Math.random() * rewardYSpots);
-    let candidateX = Math.floor(Math.random() * rewardXSpots);
-    if (YSpotTaken[candidateY] === false && !(candidateX === 3 && candidateY === 9)) {
+    let candidateX = Math.floor(Math.random() * rewardXSpots);    
+    if (YSpotTaken[candidateY] === false && !(candidateX === player.xSpot() && candidateY === player.ySpot())) {
       candidateArr.push([candidateX, candidateY]);
       YSpotTaken[candidateY] = true;
     }

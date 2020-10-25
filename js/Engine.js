@@ -24,10 +24,11 @@ class Engine {
     this.score = new Text(this.root, "10px", "10px" );
     //this.score.domElement.style.color = "red";
     //this.score.domElement.style.textShadow = "3px 3px purple"
-    this.score.update("100");
+    this.score.update(GAME_START_SCORE);
 
-    this.rewards = [];
-    this.needCeateReward = true;
+    this.rewards = [];    
+
+    this.lives = MAX_PLAYER_LIVES;
     // We add the background image to the game
     addBackground(this.root);
   }
@@ -69,34 +70,56 @@ class Engine {
     }    
 
     if (this.rewards.length === 0) {
-      let rewardSpotsArr = createRewardSpots();
-      console.log("longueur", rewardSpotsArr.length);
-      this.rewards = rewardSpotsArr.map((spot) => {
-        console.log("*********");
-        console.log("spotx", spot[0]);
-        console.log("spoty", spot[1]);
+      let rewardSpotsArr = createRewardSpots(this.player);    
+      this.rewards = rewardSpotsArr.map((spot) => {       
         return new Reward(this.root, spot[0], spot[1]);
-      });
-      this.needCeateReward = false;
-
+      });  
     }
 
     // We check if the player is dead. If he is, we alert the user
     // and return from the method (Why is the return statement important?)
     if (this.isPlayerDead()) {
       //window.alert('Game over');
-      this.isGameStarted = false;
-      this.GameOverText.domElement.style.visibility = "unset";
-      this.startButton.classList.remove("btn-clicked");
-      this.startButton.disabled = false;
 
-      return;
+      if (this.lives === 3) {
+        this.player.boomText.update('💥');
+        this.lives = 2;
+        this.player.domElement.src = 'images/mouse2.png';        
+        const newScore = parseInt(this.score.text) - this.player.price;
+        this.score.update(newScore.toString());
+        console.log("goes inside if (this.lives === 3)  ");
+        setTimeout(()=>{
+          this.player.boomText.update('');
+          }, 200);
+      }
+      else if (this.lives === 2){
+        this.player.boomText.update('💥');
+        this.lives = 1;
+        this.player.domElement.src = 'images/mouse3.png';
+        const newScore = parseInt(this.score.text) - this.player.price;
+        this.score.update(newScore.toString());
+        console.log("goes inside if (this.lives === 2)  ");
+        setTimeout(()=>{
+          this.player.boomText.update('');
+          }, 200);
+
+      }
+      else {
+        this.player.boomText.update('💥');
+        this.isGameStarted = false;
+        this.GameOverText.domElement.style.visibility = "unset";
+        this.startButton.classList.remove("btn-clicked");
+        this.startButton.disabled = false;
+        this.lives = 0;
+        console.log("goes inside else ");
+        return;
+      }
+
+      
     }  
 
     const theReward = this.rewardCatched();
-    if (theReward !== undefined) {
-      // console.log("theReward.price", theReward.price);
-      // console.log("parseInt(this.score.text)", this.score.text);
+    if (theReward !== undefined) {     
 
       const newScore = parseInt(this.score.text) + theReward.price;
       this.score.update(newScore.toString());
@@ -104,7 +127,11 @@ class Engine {
       if (index > -1) {
         this.rewards.splice(index, 1);
       }
+     
+      theReward.scale();
+      setTimeout(()=>{
       theReward.remove();
+      }, 500);
     }
 
     // If the player is not dead, then we put a setTimeout to run the gameLoop in 20 milliseconds
@@ -113,11 +140,22 @@ class Engine {
 
   // This method is not implemented correctly, which is why
   // the burger never dies. In your exercises you will fix this method.
-  isPlayerDead = () => {
-    return this.enemies.some((enemy) => {
-      return ((enemy.x === this.player.x) && (enemy.y + ENEMY_HEIGHT > this.player.y && enemy.y < this.player.y + PLAYER_HEIGHT));
+  //this method upgrade the enemies array at the same time
+  isPlayerDead = () => {    
+    let isDead = false;
+    this.enemies = this.enemies.filter((enemy) => {
+      const enemyHit = (enemy.x === this.player.x) && (enemy.y + ENEMY_HEIGHT > this.player.y && enemy.y < this.player.y + PLAYER_HEIGHT);
+      if (enemyHit) {
+        isDead = true;
+        if (this.lives > 1) {
+          enemy.remove();
+          return false;
+        }
+      }        
+      return true;    
     });
-    
+  
+    return isDead;
   };
 
   rewardCatched = () => {    
@@ -134,8 +172,13 @@ class Engine {
     this.rewards.forEach((reward)=>{
         reward.remove();
     });
-    this.rewards = [];
-    this.needCeateReward = true;
-    this.score.update("100");
+    this.rewards = [];    
+    this.enemies.forEach((enemy)=>{
+      enemy.remove();
+    });
+    this.enemies = [];
+    this.score.update(GAME_START_SCORE);
+    this.lives = 3;
+    
   };
 }

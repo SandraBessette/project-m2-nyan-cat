@@ -14,10 +14,7 @@ class Reward {
       this.root = root;
 
       const rewardYSpots = GAME_HEIGHT / REWARD_HEIGHT;
-      this.price = Math.abs((spotY - rewardYSpots) * 10);
-      // console.log("rewardYSpots", rewardYSpots);
-      // console.log("spotY", spotY);
-      // console.log("price", this.price);
+      this.price = Math.abs((spotY - rewardYSpots) * 10);     
   
       // We create a DOM node. We will be updating the DOM node every time we move the player, so we store a reference to the
       // DOM node in a property.
@@ -28,7 +25,7 @@ class Reward {
       this.domElement.style.top = ` ${this.y}px`;
       this.domElement.style.height = ` ${REWARD_HEIGHT}px`;
       this.domElement.style.width = ` ${REWARD_WIDTH}px`;
-      this.domElement.style.zIndex = '10';
+      this.domElement.style.zIndex = '9';
       this.root.appendChild(this.domElement);
 
     //  this.priceText = new Text(this.root,`${(this.x + REWARD_WIDTH/4)}px`,` ${this.y + + REWARD_HEIGHT/4}px`);
@@ -40,8 +37,14 @@ class Reward {
      this.priceText.domElement.style.zIndex = 1000;
     }
 
+    scale = ()=>{
+      this.domElement.style.transform = "scale(1.2,1.2)";
+      this.priceText.domElement.style.transform = "scale(1.2,1.2)";
+    };
+  
+
     remove = ()=>{
       this.root.removeChild(this.domElement);
       this.priceText.remove();
-    }
+    };
 }  

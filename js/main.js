@@ -10,8 +10,8 @@ const keydownHandler = (event) => {
   // event.code contains a string. The string represents which key was press. If the
   // key is left, then we call the moveLeft method of gameEngine.player (where is this method defined?)
 
-  if (!gameEngine.isGameStarted)
-    return;
+   if (!gameEngine.isGameStarted)
+      return;
     
   if (event.code === 'ArrowLeft') {
     gameEngine.player.moveLeft();

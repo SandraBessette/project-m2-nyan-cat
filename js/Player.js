@@ -11,12 +11,16 @@ class Player {
 
     // The y position never changes, so we don't need to store it in a property. It represents the y position of the top of the
     // hamburger. The y position is the distance from the top margin of the browsing area.
-    this.y = GAME_HEIGHT - PLAYER_HEIGHT - 10;
+    this.y = GAME_HEIGHT - PLAYER_HEIGHT;
+
+    this.boomText = new Text(root,`${this.x}px`,` ${this.y }px`);
+    this.boomText.domElement.style.fontSize  = "65px";
+    this.price = "100";
 
     // We create a DOM node. We will be updating the DOM node every time we move the player, so we store a reference to the
     // DOM node in a property.
     this.domElement = document.createElement('img');
-    this.domElement.src = 'images/mouse1.png';//'images/mouse.png';
+    this.domElement.src = 'images/mouse1a.png';//'images/mouse.png';
     this.domElement.style.position = 'absolute';
     this.domElement.style.left = `${this.x}px`;
     this.domElement.style.top = ` ${this.y}px`;
@@ -35,6 +39,7 @@ class Player {
     }
 
     this.domElement.style.left = `${this.x}px`;
+    this.boomText.domElement.style.left = `${this.x}px`;
   }
 
   // We do the same thing for the right key. See Engine.js to see when this happens.
@@ -42,33 +47,46 @@ class Player {
     if (this.x + PLAYER_WIDTH < GAME_WIDTH) {
       this.x = this.x + PLAYER_WIDTH;
     }
-    this.domElement.style.left = `${this.x}px`;
+    this.domElement.style.left = `${this.x}px`;    
+    this.boomText.domElement.style.left = `${this.x}px`;
   }
 
   moveUp() {
-    if (this.y - PLAYER_HEIGHT > 0) {
+    if (this.y - PLAYER_HEIGHT >= 0) {
       this.y = this.y - PLAYER_HEIGHT;
     }
-    else
-      this.y = 0;
-
+   
     this.domElement.style.top = `${this.y}px`;
+    this.boomText.domElement.style.top = `${this.y}px`;
   }
 
   moveDown() {
-    if (this.y + 2 * PLAYER_HEIGHT < GAME_HEIGHT) {
+    if (this.y + 2 * PLAYER_HEIGHT <= GAME_HEIGHT) {
       this.y = this.y + PLAYER_HEIGHT;
-    }
-    else
-      this.y = GAME_HEIGHT - PLAYER_HEIGHT -10;
+    }  
 
     this.domElement.style.top = `${this.y}px`;
+    this.boomText.domElement.style.top = `${this.y}px`;
+  }
+
+  xSpot() {
+    console.log("PlayerXSpot", this.x/PLAYER_WIDTH);
+    return this.x/PLAYER_WIDTH;
+  }
+
+  ySpot() {
+    console.log("PlayerYSpot", this.y/PLAYER_HEIGHT);
+    return this.y/PLAYER_HEIGHT;
   }
 
   reset() {
     this.x = 3 * PLAYER_WIDTH;
-    this.y = GAME_HEIGHT - PLAYER_HEIGHT - 10;
+    this.y = GAME_HEIGHT - PLAYER_HEIGHT;
     this.domElement.style.left = `${this.x}px`;
     this.domElement.style.top = `${this.y}px`;
+    this.boomText.domElement.style.top = `${this.y}px`;
+    this.boomText.domElement.style.left = `${this.x}px`;
+    this.boomText.update("");
+    this.domElement.src = 'images/mouse1a.png';
   }
 }
