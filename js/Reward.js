@@ -22,7 +22,7 @@ class Reward {
       // We create a DOM node. We will be updating the DOM node every time we move the player, so we store a reference to the
       // DOM node in a property.
       this.domElement = document.createElement('img');
-      this.domElement.src = "https://images-na.ssl-images-amazon.com/images/I/515LBEVfUQL.png";
+      this.domElement.src = './images/cheese.png'; ;//"https://images-na.ssl-images-amazon.com/images/I/515LBEVfUQL.png";
       this.domElement.style.position = 'absolute';
       this.domElement.style.left = `${this.x}px`;
       this.domElement.style.top = ` ${this.y}px`;
@@ -36,7 +36,8 @@ class Reward {
      this.priceText.update("+" + this.price.toString());
      this.priceText.domElement.style.color = "gold";
      this.priceText.domElement.style.fontSize = "18px";
-     this.priceText.domElement.style.textShadow = "2px 2px purple";
+     this.priceText.domElement.style.textShadow = "3px 3px purple";
+     this.priceText.domElement.style.zIndex = 1000;
     }
 
     remove = ()=>{

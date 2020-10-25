@@ -16,7 +16,7 @@ const nextEnemySpot = (enemies) => {
   // We then use forEach to iterate through all the enemies.
   // If you look at the constructor of the Enemy class, you can see that every instance will have a spot property.
   // We can use this property to modify the spotsTaken array.
-  const spotsTaken = [false, false, false, false, false];
+  const spotsTaken = [false, false, false, false, false, false, false];
   enemies.forEach((enemy) => {
     spotsTaken[enemy.spot] = true;
   });
@@ -40,13 +40,13 @@ const createRewardSpots = () => {
   const rewardYSpots = GAME_HEIGHT / REWARD_HEIGHT;
 
   //const XSpotTaken = [false, false, false, false, false];
-  const YSpotTaken = [false, false, false, false, false, false, false, false]; 
+  const YSpotTaken = [false, false, false, false, false, false, false, false, false, false]; 
 
   let candidateArr = [];
   while (candidateArr.length < MAX_REWARD) {
     let candidateY = Math.floor(Math.random() * rewardYSpots);
     let candidateX = Math.floor(Math.random() * rewardXSpots);
-    if (YSpotTaken[candidateY] === false && !(candidateX === 2 && candidateY === 7)) {
+    if (YSpotTaken[candidateY] === false && !(candidateX === 3 && candidateY === 9)) {
       candidateArr.push([candidateX, candidateY]);
       YSpotTaken[candidateY] = true;
     }
@@ -65,7 +65,7 @@ const addBackground = (root) => {
   const bg = document.createElement('img');
 
   // We set its src attribute and the height and width CSS attributes
-  bg.src = 'images/stars.png';
+  bg.src = "https://thumbs.gfycat.com/AdmirableDemandingGoitered-max-1mb.gif";//'images/stars.png';
   bg.style.height = `${GAME_HEIGHT}px`;
   bg.style.width = `${GAME_WIDTH}px`;
 
@@ -83,15 +83,15 @@ const addBackground = (root) => {
   whiteBox.style.top = `${GAME_HEIGHT}px`;
   whiteBox.style.height = `${ENEMY_HEIGHT}px`;
   whiteBox.style.width = `${GAME_WIDTH}px`;
-  whiteBox.style.background = '#fff';
+  whiteBox.style.background = '#fff';  
   root.append(whiteBox);
 };
 
 const addGameOver = (root) => {
-  const gameEngine = new Text(root, "20%", "45%" );
+  const gameEngine = new Text(root, "25%", "45%" );
   gameEngine.update("Game Over!");
   gameEngine.domElement.style.visibility = "hidden";
-  gameEngine.domElement.style.fontSize = "45px"; 
+  gameEngine.domElement.style.fontSize = "54px"; 
   gameEngine.domElement.style.color = "plum"; 
   gameEngine.domElement.style.textShadow = "5px 5px purple"
   return gameEngine;

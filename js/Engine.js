@@ -22,6 +22,8 @@ class Engine {
     this.GameOverText = addGameOver(this.root);
 
     this.score = new Text(this.root, "10px", "10px" );
+    //this.score.domElement.style.color = "red";
+    //this.score.domElement.style.textShadow = "3px 3px purple"
     this.score.update("100");
 
     this.rewards = [];
