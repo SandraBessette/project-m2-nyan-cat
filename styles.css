@@ -1,6 +1,10 @@
 body {
     margin: 0px;
-    font-family: 'Staatliches', cursive;
+    font-family: 'Staatliches', cursive;    
+    min-width: 650px;
+    background-color:plum;
+   
+
 }
 
 p {
@@ -12,26 +16,23 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+  
     height: 125px;
     background-color:purple;
     color: plum;
+    padding: 0 30px;
    
     font-size: 32px;
+    min-width: 650px;
 }
 
-.top-section {
-    display: flex;   
-    justify-content: center;
-    align-items: center;
-}
 .instruction {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: start;
+    align-items: start;
     margin-right: 50px;
-    padding: 25px;   
-   
+    padding: 25px;    
 }
 
 .start-btn {
@@ -41,6 +42,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-width: 180px;
     width: 180px;
     height: 75px;
     border-radius: 10px;
@@ -53,10 +55,13 @@ header {
     color: #E6E6FA;
 }
 .top-section {
+   display: flex;   
+    justify-content: center;
+    align-items: center;
     z-index: 100;
     position: relative;
-    background-color: white;    
-    padding: 30px 30px 20px 30px;    
+    background-color:#eddfea;;    
+    padding: 20px 30px 20px 30px;    
 }
 
 .game-section {    
@@ -67,4 +72,17 @@ header {
 
 .game-container{
     position: relative; 
+   border-right: solid 200px#eddfea;
+   border-left: solid 200px #eddfea;;
+   border-bottom: solid 200px #eddfea;;
 }
+
+@media only screen and (max-width: 1200px) {
+    .top-section {        
+        flex-direction: column;                         
+    }
+
+    .instruction {    
+        margin-right: 0px;        
+    }
+  }

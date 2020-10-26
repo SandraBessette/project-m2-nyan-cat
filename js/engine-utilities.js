@@ -83,7 +83,7 @@ const addBackground = (root) => {
   whiteBox.style.top = `${GAME_HEIGHT}px`;
   whiteBox.style.height = `${ENEMY_HEIGHT}px`;
   whiteBox.style.width = `${GAME_WIDTH}px`;
-  whiteBox.style.background = '#fff';  
+  whiteBox.style.background = '#eddfea';  
   root.append(whiteBox);
 };
 
@@ -92,8 +92,8 @@ const addGameOver = (root) => {
   gameEngine.update("Game Over!");
   gameEngine.domElement.style.visibility = "hidden";
   gameEngine.domElement.style.fontSize = "54px"; 
-  gameEngine.domElement.style.color = "plum"; 
-  gameEngine.domElement.style.textShadow = "5px 5px purple"
+  gameEngine.domElement.style.color = "MediumTurquoise"; 
+  gameEngine.domElement.style.textShadow = "5px 5px purple";
   return gameEngine;
 }
 
