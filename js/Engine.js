@@ -22,13 +22,16 @@ class Engine {
     this.GameOverText = addGameOver(this.root);
 
     this.score = new Text(this.root, "10px", "10px" );
-    //this.score.domElement.style.color = "red";
-    //this.score.domElement.style.textShadow = "3px 3px purple"
+    this.score.domElement.style.color = "MediumTurquoise";
+    this.score.domElement.style.textShadow = "5px 5px purple"
     this.score.update(GAME_START_SCORE);
 
     this.rewards = [];    
 
     this.lives = MAX_PLAYER_LIVES;
+
+    this.cheeseSound = new Sound(this.root, "audios/cheese.mp3");
+    this.carSound = new Sound(this.root, "audios/cat.wav");
     // We add the background image to the game
     addBackground(this.root);
   }
@@ -41,6 +44,7 @@ class Engine {
     // This code is to see how much time, in milliseconds, has elapsed since the last
     // time this method was called.
     // (new Date).getTime() evaluates to the number of milliseconds since January 1st, 1970 at midnight.
+    
     if (this.lastFrame === undefined) {
       this.lastFrame = new Date().getTime();
     }
@@ -77,60 +81,54 @@ class Engine {
     }
 
     // We check if the player is dead. If he is, we alert the user
-    // and return from the method (Why is the return statement important?)
-    if (this.isPlayerDead()) {
-      //window.alert('Game over');
-
-      if (this.lives === 3) {
-        this.player.boomText.update('💥');
-        this.lives = 2;
-        this.player.domElement.src = 'images/mouse2.png';        
-        const newScore = parseInt(this.score.text) - this.player.price;
-        this.score.update(newScore.toString());
-        console.log("goes inside if (this.lives === 3)  ");
-        setTimeout(()=>{
-          this.player.boomText.update('');
-          }, 200);
-      }
-      else if (this.lives === 2){
-        this.player.boomText.update('💥');
-        this.lives = 1;
-        this.player.domElement.src = 'images/mouse3.png';
-        const newScore = parseInt(this.score.text) - this.player.price;
-        this.score.update(newScore.toString());
-        console.log("goes inside if (this.lives === 2)  ");
-        setTimeout(()=>{
-          this.player.boomText.update('');
-          }, 200);
-
-      }
-      else {
-        this.player.boomText.update('💥');
-        this.isGameStarted = false;
-        this.GameOverText.domElement.style.visibility = "unset";
-        this.startButton.classList.remove("btn-clicked");
-        this.startButton.disabled = false;
-        this.lives = 0;
-        console.log("goes inside else ");
-        return;
-      }
-
-      
-    }  
+    // and return from the method (Why is the return statement important?)  
+    if (this.isPlayerDead()) {   
+      this.carSound.play();
+      switch (this.lives) {
+        case 3:
+          this.player.boomText.update('💥');        
+          this.lives = 2;
+          this.player.domElement.src = 'images/mouse2.png';        
+          const newScore3 = parseInt(this.score.text) - this.player.price;
+          this.score.update(newScore3.toString());          
+        
+          setTimeout(()=>{
+            if (this.lives === 2) 
+              this.player.boomText.update('');  
+            }, 200);           
+          break;    
+        case 2:    
+          this.player.boomText.update('💥');
+          this.lives = 1;
+          this.player.domElement.src = 'images/mouse3.png';
+          const newScore2 = parseInt(this.score.text) - this.player.price;
+          this.score.update(newScore2.toString());           
+        
+          setTimeout(()=>{
+            if (this.lives === 1)
+              this.player.boomText.update('');
+            }, 200);          
+          break;
+        case 1:
+          this.player.boomText.update('💥');
+          this.isGameStarted = false;
+          this.GameOverText.domElement.style.visibility = "unset";
+          this.startButton.classList.remove("btn-clicked");
+          this.startButton.disabled = false;
+          this.lives = 0;       
+          return;        
+      }       
+    }
 
     const theReward = this.rewardCatched();
     if (theReward !== undefined) {     
-
+      this.cheeseSound.play();
       const newScore = parseInt(this.score.text) + theReward.price;
       this.score.update(newScore.toString());
-      const index = this.rewards.indexOf(theReward);
-      if (index > -1) {
-        this.rewards.splice(index, 1);
-      }
-     
+      this.rewards = removeElementInArr(this.rewards, theReward);    
       theReward.scale();
       setTimeout(()=>{
-      theReward.remove();
+        theReward.remove();
       }, 500);
     }
 
@@ -141,21 +139,16 @@ class Engine {
   // This method is not implemented correctly, which is why
   // the burger never dies. In your exercises you will fix this method.
   //this method upgrade the enemies array at the same time
-  isPlayerDead = () => {    
-    let isDead = false;
-    this.enemies = this.enemies.filter((enemy) => {
-      const enemyHit = (enemy.x === this.player.x) && (enemy.y + ENEMY_HEIGHT > this.player.y && enemy.y < this.player.y + PLAYER_HEIGHT);
-      if (enemyHit) {
-        isDead = true;
-        if (this.lives > 1) {
-          enemy.remove();
-          return false;
-        }
-      }        
-      return true;    
-    });
-  
-    return isDead;
+  isPlayerDead = () => {  
+    const theEnemyHit = this.enemies.find((enemy) => {     
+      return ((enemy.x === this.player.x) && (enemy.y + ENEMY_HEIGHT > this.player.y && enemy.y < this.player.y + PLAYER_HEIGHT));
+    });   
+    if (theEnemyHit !== undefined && this.lives > 1) {
+        theEnemyHit.remove();
+        this.enemies = removeElementInArr(this.enemies, theEnemyHit);
+        
+    }
+    return theEnemyHit !== undefined;
   };
 
   rewardCatched = () => {    

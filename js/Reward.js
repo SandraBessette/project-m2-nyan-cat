@@ -19,13 +19,13 @@ class Reward {
       // We create a DOM node. We will be updating the DOM node every time we move the player, so we store a reference to the
       // DOM node in a property.
       this.domElement = document.createElement('img');
-      this.domElement.src = './images/cheese.png'; ;//"https://images-na.ssl-images-amazon.com/images/I/515LBEVfUQL.png";
+      this.domElement.src = './images/cheese.png'; 
       this.domElement.style.position = 'absolute';
       this.domElement.style.left = `${this.x}px`;
       this.domElement.style.top = ` ${this.y}px`;
       this.domElement.style.height = ` ${REWARD_HEIGHT}px`;
       this.domElement.style.width = ` ${REWARD_WIDTH}px`;
-      this.domElement.style.zIndex = '9';
+      this.domElement.style.zIndex = '8';
       this.root.appendChild(this.domElement);
 
     //  this.priceText = new Text(this.root,`${(this.x + REWARD_WIDTH/4)}px`,` ${this.y + + REWARD_HEIGHT/4}px`);
@@ -34,7 +34,7 @@ class Reward {
      this.priceText.domElement.style.color = "gold";
      this.priceText.domElement.style.fontSize = "18px";
      this.priceText.domElement.style.textShadow = "3px 3px purple";
-     this.priceText.domElement.style.zIndex = 1000;
+     this.priceText.domElement.style.zIndex = "1000";
     }
 
     scale = ()=>{

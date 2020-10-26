@@ -17,6 +17,13 @@ class Player {
     this.boomText.domElement.style.fontSize  = "65px";
     this.price = "100";
 
+      /*this.priceText = new Text(root,`${this.x }px`,` ${this.y }px`)
+     //this.priceText.update("-" + this.price);
+     this.priceText.domElement.style.color = "gold";
+     this.priceText.domElement.style.fontSize = "36px";
+     this.priceText.domElement.style.textShadow = "3px 3px purple";
+     this.priceText.domElement.style.zIndex = "3000";*/
+
     // We create a DOM node. We will be updating the DOM node every time we move the player, so we store a reference to the
     // DOM node in a property.
     this.domElement = document.createElement('img');

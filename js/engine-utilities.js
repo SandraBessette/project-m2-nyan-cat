@@ -65,7 +65,7 @@ const addBackground = (root) => {
   const bg = document.createElement('img');
 
   // We set its src attribute and the height and width CSS attributes
-  bg.src = "https://thumbs.gfycat.com/AdmirableDemandingGoitered-max-1mb.gif";//'images/stars.png';
+  bg.src = 'images/purpleStar.gif'//"https://thumbs.gfycat.com/AdmirableDemandingGoitered-max-1mb.gif";//'images/stars.png';
   bg.style.height = `${GAME_HEIGHT}px`;
   bg.style.width = `${GAME_WIDTH}px`;
 
@@ -101,3 +101,11 @@ const startButton = () => {
   return document.querySelector(".start-btn");
 }
 
+
+const removeElementInArr = (arr, el) => {
+  const index = arr.indexOf(el);
+      if (index > -1) {
+        arr.splice(index, 1);
+      }
+  return arr;
+}
