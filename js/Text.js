@@ -1,10 +1,7 @@
-// This class is not used in the project yet.
+//This class create a div element in the dom thata will contain a text. 
 class Text {
-  // The constructor has three parameters. Here is an example of how you would create
-  // an instance of this class
-  constructor(root, xPos, yPos) {
-    // We create a DOM element, set its CSS attributes then append it to the parent DOM element. We also
-    // set the \`domElement\` property of the instance to the newly created DOM element so we can update it later
+  // The constructor has three parameters the DOM roots ansd the x and y position of the text
+  constructor(root, xPos, yPos) {   
     this.root = root;
     const div = document.createElement('div');
 
@@ -27,6 +24,7 @@ class Text {
     this.text = this.domElement.innerText;    
   }
 
+  //Remove the text element
   remove = ()=>{
     this.root.removeChild(this.domElement);
   }

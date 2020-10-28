@@ -13,16 +13,12 @@ class Player {
     // hamburger. The y position is the distance from the top margin of the browsing area.
     this.y = GAME_HEIGHT - PLAYER_HEIGHT;
 
+    //The collision emoji
     this.boomText = new Text(root,`${this.x}px`,` ${this.y }px`);
     this.boomText.domElement.style.fontSize  = "65px";
-    this.price = "100";
 
-      /*this.priceText = new Text(root,`${this.x }px`,` ${this.y }px`)
-     //this.priceText.update("-" + this.price);
-     this.priceText.domElement.style.color = "gold";
-     this.priceText.domElement.style.fontSize = "36px";
-     this.priceText.domElement.style.textShadow = "3px 3px purple";
-     this.priceText.domElement.style.zIndex = "3000";*/
+    //Gives the "price" for a live.
+    this.price = "100";
 
     // We create a DOM node. We will be updating the DOM node every time we move the player, so we store a reference to the
     // DOM node in a property.
@@ -76,16 +72,17 @@ class Player {
     this.boomText.domElement.style.top = `${this.y}px`;
   }
 
-  xSpot() {
-    console.log("PlayerXSpot", this.x/PLAYER_WIDTH);
+  //Calculates and return the X spot of the player
+  xSpot() {   
     return this.x/PLAYER_WIDTH;
   }
 
-  ySpot() {
-    console.log("PlayerYSpot", this.y/PLAYER_HEIGHT);
+  //Calculates and return the Y spot of the player
+  ySpot() {    
     return this.y/PLAYER_HEIGHT;
   }
 
+  //reset the attributes of a player.
   reset() {
     this.x = 3 * PLAYER_WIDTH;
     this.y = GAME_HEIGHT - PLAYER_HEIGHT;

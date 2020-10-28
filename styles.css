@@ -1,14 +1,12 @@
 body {
     margin: 0px;
     font-family: 'Staatliches', cursive;    
-    min-width: 650px;
-    background-color:plum;
-   
-
+    min-width: 675px;
+    background-color: plum;   
 }
 
 p {
-    font-size: 32px;
+    font-size: 28px;
     margin: 0px;
 }
 
@@ -32,7 +30,8 @@ header {
     justify-content: start;
     align-items: start;
     margin-right: 50px;
-    padding: 25px;    
+    padding: 25px;   
+    min-width: 555px 
 }
 
 .start-btn {
@@ -48,11 +47,12 @@ header {
     border-radius: 10px;
     background-color: purple;  
     border: dashed 5px gold;
+    transition: transform 0.2s ease-in-out;
 }
 
 .btn-clicked{
     background-color:plum;
-    color: #E6E6FA;
+    color: #E6E6FA;    
 }
 .top-section {
    display: flex;   
@@ -67,22 +67,37 @@ header {
 .game-section {    
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;  
 } 
 
 .game-container{
     position: relative; 
    border-right: solid 200px#eddfea;
-   border-left: solid 200px #eddfea;;
+   border-left: solid 200px #eddfea;
    border-bottom: solid 200px #eddfea;;
+}
+
+.start-btn:not(.btn-clicked):hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 @media only screen and (max-width: 1200px) {
     .top-section {        
         flex-direction: column;                         
     }
+    .game-container{
+       
+       border-right: solid 100px#eddfea;
+       border-left: solid 100px #eddfea;
+      
+    }
 
     .instruction {    
         margin-right: 0px;        
+    }
+
+    p {
+        font-size: 24px;      
     }
   }

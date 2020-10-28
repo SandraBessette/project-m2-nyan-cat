@@ -34,27 +34,6 @@ const nextEnemySpot = (enemies) => {
   return candidate;
 };
 
-const createRewardSpots = (player) => {
-  // enemySpots will refer to the number of spots available (can you calculate it?)
-  const rewardXSpots = GAME_WIDTH / REWARD_WIDTH;
-  const rewardYSpots = GAME_HEIGHT / REWARD_HEIGHT;
-
-  //const XSpotTaken = [false, false, false, false, false];
-  const YSpotTaken = [false, false, false, false, false, false, false, false, false, false]; 
-
-  let candidateArr = [];
-  while (candidateArr.length < MAX_REWARD) {
-    let candidateY = Math.floor(Math.random() * rewardYSpots);
-    let candidateX = Math.floor(Math.random() * rewardXSpots);    
-    if (YSpotTaken[candidateY] === false && !(candidateX === player.xSpot() && candidateY === player.ySpot())) {
-      candidateArr.push([candidateX, candidateY]);
-      YSpotTaken[candidateY] = true;
-    }
-  }  
-
-  return candidateArr;
-}
-
 // addBackground contains all the logic to display the starry background of the game.
 // It is a variable that refers to a function.
 // The function takes one parameter
@@ -65,7 +44,7 @@ const addBackground = (root) => {
   const bg = document.createElement('img');
 
   // We set its src attribute and the height and width CSS attributes
-  bg.src = 'images/purpleStar.gif'//"https://thumbs.gfycat.com/AdmirableDemandingGoitered-max-1mb.gif";//'images/stars.png';
+  bg.src = 'images/purpleStar.gif';
   bg.style.height = `${GAME_HEIGHT}px`;
   bg.style.width = `${GAME_WIDTH}px`;
 
@@ -87,6 +66,7 @@ const addBackground = (root) => {
   root.append(whiteBox);
 };
 
+//Creates the agme over text and style.
 const addGameOver = (root) => {
   const gameEngine = new Text(root, "25%", "45%" );
   gameEngine.update("Game Over!");
@@ -97,11 +77,36 @@ const addGameOver = (root) => {
   return gameEngine;
 }
 
+//Creates an array of array of x and y random postion for the reward.
+const createRewardSpots = (player) => {  
+  const rewardXSpots = GAME_WIDTH / REWARD_WIDTH;
+  const rewardYSpots = GAME_HEIGHT / REWARD_HEIGHT; 
+  const YSpotTaken = [false, false, false, false, false, false, false, false, false, false]; 
+
+  let candidateArr = [];
+  while (candidateArr.length < MAX_REWARD) {
+    let candidateY = Math.floor(Math.random() * rewardYSpots);
+    let candidateX = Math.floor(Math.random() * rewardXSpots);    
+    if (YSpotTaken[candidateY] === false && !(candidateX === player.xSpot() && candidateY === player.ySpot())) {
+      candidateArr.push([candidateX, candidateY]);
+      YSpotTaken[candidateY] = true;
+    }
+  } 
+  return candidateArr;
+}
+
+//Sets new score. Expect the score attribute and score to add or remove (number). Return the new calculated score as a string.
+const setScore = (score, changeScore) => {
+  const newScore = parseInt(score.text) + changeScore;
+  return newScore.toString();   
+}
+
+//Gets the start button dom element
 const startButton = () => {
   return document.querySelector(".start-btn");
 }
 
-
+//Remove an element in an array and return that array.
 const removeElementInArr = (arr, el) => {
   const index = arr.indexOf(el);
       if (index > -1) {

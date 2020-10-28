@@ -2,6 +2,14 @@
 // we see that it has a div with an id of `"app"`
 const gameEngine = new Engine(document.getElementById('app'));
 
+//Handle the click of the start button. This reset and start the game.
+const clickHandler = (event) => {
+  gameEngine.isGameStarted = true; 
+  gameEngine.reset();
+  // We call the gameLoop method to start the game
+  gameEngine.gameLoop();  
+}
+
 // keydownHandler is a variable that refers to a function. The function has one parameter
 // (does the parameter name matter?) which is called event. As we will see below, this function
 // will be called every time the user presses a key. The argument of the function call will be an object.
@@ -17,8 +25,6 @@ const keydownHandler = (event) => {
     gameEngine.player.moveLeft();
   }
 
-  // If `event.code` is the string that represents a right arrow keypress,
-  // then move our hamburger to the right
   if (event.code === 'ArrowRight') {
     gameEngine.player.moveRight();
   }
@@ -27,31 +33,13 @@ const keydownHandler = (event) => {
     gameEngine.player.moveUp();
   }
 
-
   if (event.code === 'ArrowDown') {
     gameEngine.player.moveDown();
   }
 };
 
-const clickHandler = (event) => {
-  gameEngine.isGameStarted = true; 
-  gameEngine.reset();
-  //window.location.reload();
-  gameEngine.gameLoop();
-  
- /* event.target.classList.add("btn-clicked");
-  event.target.disabled = true; 
-  gameEngine.GameOverText.domElement.style.visibility = "hidden";*/
-}
 // We add an event listener to document. document the ancestor of all DOM nodes in the DOM.
 document.addEventListener('keydown', keydownHandler);
-
-// We call the gameLoop method to start the game
-
-/*const startBtn = new Text(document.getElementById('app'), 2 * PLAYER_WIDTH , 50/100 * GAME_HEIGHT);
-console.log(startBtn);
-startBtn.domElement.classList.add("start-btn");
-startBtn.update("start");*/
 
 const startBtn = gameEngine.startButton;
 startBtn.addEventListener("click",clickHandler);

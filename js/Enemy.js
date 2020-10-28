@@ -69,6 +69,7 @@ class Enemy {
     }
   }
 
+  //Remove the domElement
   remove = ()=>{
     this.root.removeChild(this.domElement);  
     this.destroyed = true;

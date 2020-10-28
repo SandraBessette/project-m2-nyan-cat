@@ -40,6 +40,7 @@ class Engine {
   //  - Updates the enemy positions
   //  - Detects a collision between the player and any enemy
   //  - Removes enemies that are too low from the enemies array
+  //  - Updates the reward position
   gameLoop = () => {
     // This code is to see how much time, in milliseconds, has elapsed since the last
     // time this method was called.
@@ -73,6 +74,7 @@ class Engine {
       this.enemies.push(new Enemy(this.root, spot));
     }    
 
+    //Create the rewards in random spot
     if (this.rewards.length === 0) {
       let rewardSpotsArr = createRewardSpots(this.player);    
       this.rewards = rewardSpotsArr.map((spot) => {       
@@ -81,50 +83,46 @@ class Engine {
     }
 
     // We check if the player is dead. If he is, we alert the user
-    // and return from the method (Why is the return statement important?)  
+    // and return from the method 
     if (this.isPlayerDead()) {   
       this.carSound.play();
+      this.player.boomText.update('💥');  
       switch (this.lives) {
-        case 3:
-          this.player.boomText.update('💥');        
+        case 3:                
           this.lives = 2;
-          this.player.domElement.src = 'images/mouse2.png';        
-          const newScore3 = parseInt(this.score.text) - this.player.price;
-          this.score.update(newScore3.toString());          
+          this.player.domElement.src = 'images/mouse2.png';  
+          this.score.update(setScore(this.score, -this.player.price));  
         
           setTimeout(()=>{
             if (this.lives === 2) 
               this.player.boomText.update('');  
             }, 200);           
           break;    
-        case 2:    
-          this.player.boomText.update('💥');
+        case 2:   
           this.lives = 1;
-          this.player.domElement.src = 'images/mouse3.png';
-          const newScore2 = parseInt(this.score.text) - this.player.price;
-          this.score.update(newScore2.toString());           
+          this.player.domElement.src = 'images/mouse3.png';            
+          this.score.update(setScore(this.score, -this.player.price));    
         
           setTimeout(()=>{
             if (this.lives === 1)
               this.player.boomText.update('');
             }, 200);          
           break;
-        case 1:
-          this.player.boomText.update('💥');
+        case 1:      
+          this.lives = 0;   
           this.isGameStarted = false;
           this.GameOverText.domElement.style.visibility = "unset";
           this.startButton.classList.remove("btn-clicked");
-          this.startButton.disabled = false;
-          this.lives = 0;       
+          this.startButton.disabled = false;              
           return;        
       }       
     }
 
+    //Verify if the player as hit a reward. If so remove the reward and ajust the score.
     const theReward = this.rewardCatched();
     if (theReward !== undefined) {     
-      this.cheeseSound.play();
-      const newScore = parseInt(this.score.text) + theReward.price;
-      this.score.update(newScore.toString());
+      this.cheeseSound.play();     
+      this.score.update(setScore(this.score, theReward.price)); 
       this.rewards = removeElementInArr(this.rewards, theReward);    
       theReward.scale();
       setTimeout(()=>{
@@ -136,27 +134,28 @@ class Engine {
     setTimeout(this.gameLoop, 20);
   };
 
-  // This method is not implemented correctly, which is why
-  // the burger never dies. In your exercises you will fix this method.
-  //this method upgrade the enemies array at the same time
+   //Indicates if an enemy hit the player or not. It also upgrade the enemies array at the same time (remove the cat hit).
   isPlayerDead = () => {  
     const theEnemyHit = this.enemies.find((enemy) => {     
       return ((enemy.x === this.player.x) && (enemy.y + ENEMY_HEIGHT > this.player.y && enemy.y < this.player.y + PLAYER_HEIGHT));
-    });   
+    });
+    
     if (theEnemyHit !== undefined && this.lives > 1) {
         theEnemyHit.remove();
         this.enemies = removeElementInArr(this.enemies, theEnemyHit);
-        
     }
+
     return theEnemyHit !== undefined;
   };
 
+  // Indicates if the payer hit a reward and return the reward if it is the case. 
   rewardCatched = () => {    
     return this.rewards.find((reward) => {     
       return ((reward.x === this.player.x) && (reward.y + REWARD_HEIGHT > this.player.y && reward.y < this.player.y + PLAYER_HEIGHT));
     });    
   };
 
+  //Reset the element of the class.
   reset = () => {
     this.player.reset();
     this.startButton.classList.add("btn-clicked");
@@ -171,7 +170,6 @@ class Engine {
     });
     this.enemies = [];
     this.score.update(GAME_START_SCORE);
-    this.lives = 3;
-    
+    this.lives = 3;    
   };
 }
