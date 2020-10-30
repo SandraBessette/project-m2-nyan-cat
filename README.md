@@ -21,4 +21,11 @@ I have added the following features to the original game:
 
 ## Netlify link
 
+## Sound credit
+- "Cat, Screaming, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
+L’usage de cette musique est autorisé conformément à la licence Creative Commons Attibution 3.0 (http://creativecommons.org/licenses/by/3.0/deed.fr).
+
+- SFX for games/apps » Level Up 01 by rhodesmas of Freesound.org
+L’usage de cette musique est autorisé conformément à la licence Creative Commons Attibution 3.0 (http://creativecommons.org/licenses/by/3.0/deed.fr).
+
 
