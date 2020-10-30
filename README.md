@@ -22,6 +22,8 @@ I have added the following features to the original game:
 ## Netlify link
 https://thirsty-lichterman-6175b8.netlify.app
 
+(If a scroolbar appear on the page, it is better to zoom down the page for a better game experiences :-))
+
 ## Sound credit
 - "Cat, Screaming, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
 L’usage de cette musique est autorisé conformément à la licence Creative Commons Attibution 3.0 (http://creativecommons.org/licenses/by/3.0/deed.fr).
