@@ -14,11 +14,11 @@ class Player {
     this.y = GAME_HEIGHT - PLAYER_HEIGHT;
 
     //The collision emoji
-    this.boomText = new Text(root,`${this.x}px`,` ${this.y }px`);
+    this.boomText = new Text(root,`${this.x}px`,` ${this.y }px`);   
     this.boomText.domElement.style.fontSize  = "65px";
 
     //Gives the "price" for a live.
-    this.price = "100";
+    this.price = -100;
 
     // We create a DOM node. We will be updating the DOM node every time we move the player, so we store a reference to the
     // DOM node in a property.
@@ -37,7 +37,7 @@ class Player {
   // This method will be called when the user presses the left key. See in Engine.js
   // how we relate the key presses to this method
   moveLeft() {
-    if (this.x > 0) {
+    if (this.x > 0) {     
       this.x = this.x - PLAYER_WIDTH;
     }
 

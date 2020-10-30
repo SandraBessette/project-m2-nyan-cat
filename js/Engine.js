@@ -86,27 +86,27 @@ class Engine {
     // and return from the method 
     if (this.isPlayerDead()) {   
       this.carSound.play();
-      this.player.boomText.update('💥');  
+      this.player.boomText.update('💥');        
       switch (this.lives) {
         case 3:                
           this.lives = 2;
           this.player.domElement.src = 'images/mouse2.png';  
-          this.score.update(setScore(this.score, -this.player.price));  
+          this.score.update(setScore(this.score, this.player.price));  
         
-          setTimeout(()=>{
+         setTimeout(()=>{
             if (this.lives === 2) 
               this.player.boomText.update('');  
-            }, 200);           
+            }, 200);         
           break;    
         case 2:   
           this.lives = 1;
           this.player.domElement.src = 'images/mouse3.png';            
-          this.score.update(setScore(this.score, -this.player.price));    
+          this.score.update(setScore(this.score, this.player.price));    
         
           setTimeout(()=>{
             if (this.lives === 1)
               this.player.boomText.update('');
-            }, 200);          
+            }, 200);         
           break;
         case 1:      
           this.lives = 0;   
@@ -170,6 +170,6 @@ class Engine {
     });
     this.enemies = [];
     this.score.update(GAME_START_SCORE);
-    this.lives = 3;    
+    this.lives = 3;        
   };
 }
