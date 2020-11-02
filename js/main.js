@@ -23,6 +23,7 @@ const keydownHandler = (event) => {
     
   if (event.code === 'ArrowLeft') {
     gameEngine.player.moveLeft();
+    
   }
 
   if (event.code === 'ArrowRight') {
@@ -31,10 +32,12 @@ const keydownHandler = (event) => {
 
   if (event.code === 'ArrowUp') {
     gameEngine.player.moveUp();
+    event.preventDefault();
   }
 
   if (event.code === 'ArrowDown') {
     gameEngine.player.moveDown();
+    event.preventDefault();
   }
 };
 
