@@ -74,7 +74,7 @@ header {
     position: relative; 
    border-right: solid 200px#eddfea;
    border-left: solid 200px #eddfea;
-   border-bottom: solid 200px #eddfea;;
+   border-bottom: solid 200px #eddfea;
 }
 
 .start-btn:not(.btn-clicked):hover {
